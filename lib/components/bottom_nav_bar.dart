@@ -44,7 +44,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               text: 'Home',
             ),
             GButton(
-              icon: Icons.category,iconColor: Colors.white,
+              icon: Icons.food_bank_outlined,iconColor: Colors.white,
               text: 'Categories',
             ),
             GButton(

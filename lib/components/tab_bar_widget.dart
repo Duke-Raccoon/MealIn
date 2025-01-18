@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipeapp/components/constant_function.dart';
+import 'package:recipeapp/screens/recipe_detail.dart';
 
 class TabBarWidget extends StatelessWidget {
   const TabBarWidget({super.key});
@@ -18,6 +19,7 @@ class TabBarWidget extends StatelessWidget {
             height: h * 0.04,
             child: TabBar(
               labelStyle: const TextStyle(
+                
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
               ),
@@ -25,9 +27,9 @@ class TabBarWidget extends StatelessWidget {
               labelColor: Colors.deepPurple,
               dividerColor: Colors.white,
               indicator: BoxDecoration(
-                  color: Colors.orange,
+                  color: Colors.deepOrange,
                   borderRadius: BorderRadius.circular(20)),
-              labelPadding: EdgeInsets.symmetric(horizontal: w * 0.01),
+              labelPadding: EdgeInsets.symmetric(horizontal: w * 0.001),
               tabs: const [
                 TabItem(title: 'Breakfast'),
                 TabItem(title: 'Lunch'),
@@ -37,7 +39,7 @@ class TabBarWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: h * 0.02,
+            height: h * 0.03,
           ),
           SizedBox(
             height: h * 0.3,
@@ -65,7 +67,7 @@ class TabItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.red,
+          color: Colors.deepOrange,
         ),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -74,7 +76,7 @@ class TabItem extends StatelessWidget {
         child: Center(
           child: Text(
             title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -113,6 +115,13 @@ class HomeTabBarView extends StatelessWidget {
                   width: w * 0.5,
                   child: Stack(
                     children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => RecipeDetail(recipe: snap)));
+                        
+                        },
+                        
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

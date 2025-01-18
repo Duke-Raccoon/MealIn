@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:recipeapp/components/bottom_nav_bar.dart';
+import 'package:recipeapp/screens/categories_screen.dart';
 import 'package:recipeapp/screens/home_screen.dart';
 
 class Home extends StatefulWidget {
@@ -20,7 +21,6 @@ class _HomeState extends State<Home> {
   }
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     pageController.dispose();
   }
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
         physics: const NeverScrollableScrollPhysics(),
         children: const[
           HomePage(),
-          Center(child: Text('Page 22'),),
+          RecipeCategory(),
           Center(child: Text('Page 3'),),
           Center(child: Text('Page 4'),),
           Center(child: Text('Page 5'),),
