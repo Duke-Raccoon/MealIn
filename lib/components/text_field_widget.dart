@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:recipeapp/screens/all_recipe.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController searchController = TextEditingController();
     final h= MediaQuery.of(context).size.height;
     final w= MediaQuery.of(context).size.width;
     return Container( 
@@ -24,6 +26,7 @@ class TextFieldWidget extends StatelessWidget {
       ),
     
       child: TextField(
+        controller: searchController,
         style: TextStyle(
           fontSize: w*0.03,
           color: Colors.black,
@@ -45,10 +48,17 @@ class TextFieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide.none
           ),
-          suffixIcon: IconButton(
-            icon: const Icon(Icons.search), color: Colors.deepOrange,
-            onPressed: (){},
-          )
+          suffixIcon: GestureDetector(
+            onTap: () {
+              Navigator.push(context, 
+              MaterialPageRoute(builder: (context)=> AllRecipe(recipe: searchController.text)));
+            },
+            child:  Icon(Icons.search, 
+            color: Colors.deepOrange,
+            size: w*0.06,
+              
+            ),
+        )
         ),
       ),);
   }

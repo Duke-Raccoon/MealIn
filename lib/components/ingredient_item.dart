@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class IngredientItem extends StatelessWidget {
   final String quantity, measure, food, imageUrl;
@@ -48,8 +49,33 @@ class IngredientItem extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
           ),
-          SizedBox(width: w*0.03,),
-          const Icon(Icons.add_circle_outline, color: Colors.white,)
+          ValueListenableBuilder(
+            valueListenable: Hive.box('shopping').listenable(),
+            builder: (context, box,_){
+              bool isAdded = box.containsKey(food);
+              if(isAdded){
+                return GestureDetector(
+                  onTap: (){
+                    box.delete(food);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.deepOrange,
+                      content: Text('Removed $food from shopping list', style: TextStyle(fontSize: h*0.02),),
+                      duration: const Duration(seconds: 1),
+                    ));
+                  },
+                  child: const Icon(Icons.check_circle, color: Colors.white,));
+              }
+              else{
+              return GestureDetector(
+                onTap: () {
+                  box.put(food,'$food, $quantity $measure ');
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.deepOrange,
+                    content: Text('Added $food to shopping list',style: TextStyle(fontSize: h*0.02),),
+                    duration: const Duration(seconds: 1),
+                  ));
+                },
+                child: const Icon(Icons.add_circle_outline, color: Colors.white,));
+            }},
+          )
         ],
       ),
     );

@@ -9,7 +9,7 @@ class AllRecipe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final h = MediaQuery.of(context).size.height;
+    //final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: CustomAppBar(title: recipe, back: true),
@@ -53,7 +53,7 @@ class AllRecipe extends StatelessWidget {
                                 GestureDetector(
                                   onTap: (){
                                     Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => RecipeDetail(recipe: snap),));
+                                    MaterialPageRoute(builder: (context) => RecipeDetail(recipeInfo: snap),));
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

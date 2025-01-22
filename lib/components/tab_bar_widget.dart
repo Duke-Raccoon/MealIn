@@ -117,7 +117,7 @@ class HomeTabBarView extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RecipeDetail(recipe: snap)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => RecipeDetail(recipeInfo: snap)));
                         
                         },
                         

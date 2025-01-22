@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:recipeapp/components/circle_button.dart';
 import 'package:recipeapp/components/custom_clipper.dart';
 
 import 'package:recipeapp/components/ingredient_list.dart';
-
+import 'package:recipeapp/constants/share.dart';
+import 'package:recipeapp/constants/start_recipe.dart';
 
 class RecipeDetail extends StatelessWidget {
-  final Map<String, dynamic> recipe;
-  
-  const RecipeDetail({super.key, required this.recipe});
+  final Map<String, dynamic> recipeInfo;
+
+  const RecipeDetail({super.key, required this.recipeInfo});
 
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    var ingredientCount = recipe['ingredients'].length;
-    String time = recipe['totalTime'].toString();
+    var ingredientCount = recipeInfo['ingredients'].length;
+    String time = recipeInfo['totalTime'].toString();
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -28,7 +30,7 @@ class RecipeDetail extends StatelessWidget {
                   height: h * 0.4,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(recipe['image']),
+                      image: NetworkImage(recipeInfo['image']),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -57,7 +59,7 @@ class RecipeDetail extends StatelessWidget {
                     height: h * 0.01,
                   ),
                   Text(
-                    recipe['label'],
+                    recipeInfo['label'],
                     style: TextStyle(
                         fontSize: w * 0.05,
                         fontWeight: FontWeight.bold,
@@ -73,22 +75,60 @@ class RecipeDetail extends StatelessWidget {
                   SizedBox(
                     height: h * 0.01,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CircleButton(
-                        icon: Icons.share,
-                        label: 'Share',
+                      GestureDetector(
+                        onTap: () {
+                          ShareRecipe.share(recipeInfo['url']);
+                        },
+                        child: const CircleButton(
+                          icon: Icons.share,
+                          label: 'Share',
+                        ),
                       ),
-                      CircleButton(
-                        icon: Icons.bookmark_border,
-                        label: 'Save',
+                      ValueListenableBuilder(
+                        valueListenable: Hive.box('saved').listenable(),
+                        builder: (context,box,_) {
+                          bool saved=Hive.box('saved').containsKey(recipeInfo['label']);
+                          if(saved){
+                            return GestureDetector(
+                              onTap:(){
+                                Hive.box('saved').delete(recipeInfo['label'],);
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  backgroundColor: Colors.deepOrange,
+                                  content: Text('Removed from saved recipes'),
+                                  duration: Duration(seconds: 1),
+                                ));
+                              },
+                              child: const CircleButton(
+                                 icon: Icons.bookmark, label: 'Saved',));
+                          }
+                          else{return GestureDetector(
+                            onTap:(){
+                                Hive.box('saved').put(recipeInfo['label'], recipeInfo['label']);
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  backgroundColor: Colors.deepOrange,
+                                  content: Text('Added to saved recipes'),
+                                  duration: Duration(seconds: 1),
+                                ));
+                              },
+                              child: const CircleButton(
+                                 icon: Icons.bookmark_border, label: 'Save',)
+
+                            
+                                                    
+                          );
+                            
+                          }
+                        },
+                        
                       ),
-                      CircleButton(
+                      const CircleButton(
                         icon: Icons.monitor_heart_outlined,
                         label: 'Calories',
                       ),
-                      CircleButton(
+                      const CircleButton(
                         icon: Icons.table_chart_outlined,
                         label: 'unit chart',
                       ),
@@ -101,14 +141,17 @@ class RecipeDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        "Direction",
+                        "Let's start cooking",
                         style: TextStyle(
                             fontSize: w * 0.05, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         width: w * 0.36,
                         child: ElevatedButton(
-                            onPressed: () {}, child: const Text('Start')),
+                            onPressed: () {
+                              StartRecipe.startRecipe(recipeInfo['url']);
+                            },
+                            child: const Text('Start')),
                       ),
                     ],
                   ),
@@ -157,11 +200,9 @@ class RecipeDetail extends StatelessWidget {
                   SizedBox(
                     height: h * 2,
                     child: IngredientList(
-                      ingredients: recipe['ingredients'],
+                      ingredients: recipeInfo['ingredients'],
                     ),
                   ),
-                 
-                  
                 ],
               ),
             )
