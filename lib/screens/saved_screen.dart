@@ -25,10 +25,10 @@ class SavedScreen extends StatelessWidget {
                       children: [
                         Expanded(flex: 3, child: Text(data[index])),
                         PopupMenuButton(itemBuilder: (context) {
-                          return const [
+                          return [
                             PopupMenuItem(value: 'share', child: Text('share')),
                             PopupMenuItem(
-                                value: 'delete', child: Text('delete')),
+                                value: 'delete', child: Text('delete'), onTap: () { Hive.box('saved').deleteAt(index);},),
                           ];
                         })
                       ],
