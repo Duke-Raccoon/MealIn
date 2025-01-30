@@ -7,10 +7,11 @@ class SavedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: const CustomAppBar(title: 'Saved', back: false),
       body: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: ValueListenableBuilder(
             valueListenable: Hive.box('saved').listenable(),
             builder: (context, box, _) {
@@ -20,17 +21,46 @@ class SavedScreen extends StatelessWidget {
                   var data = box.values.toList();
                   return ListTile(
                       title: Container(
-                    color: Colors.deepOrange,
+                        padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Colors.pinkAccent, Colors.deepOrangeAccent],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius:
+                          BorderRadius.circular(30), // Rounded corners
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.pink
+                              .withOpacity(0.4), // Pink shadow for glow effect
+                          blurRadius: 15,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    height: h * 0.1,
                     child: Row(
                       children: [
-                        Expanded(flex: 3, child: Text(data[index])),
-                        PopupMenuButton(itemBuilder: (context) {
-                          return const [
-                            PopupMenuItem(value: 'share', child: Text('share')),
-                            PopupMenuItem(
-                                value: 'delete', child: Text('delete')),
-                          ];
-                        })
+                        Expanded(
+                            flex: 3,
+                            child: Text(
+                              data[index],
+                              style: const TextStyle(color: Colors.white),
+                            )),
+                        PopupMenuButton(
+                            color: Colors.white,
+                            itemBuilder: (context) {
+                              return const [
+                                PopupMenuItem(
+                                    value: 'share', child: Text('share')),
+                                PopupMenuItem(
+                                    value: 'delete', child: Text('delete')),
+                              ];
+                            },
+                            onSelected: (String value) async{
+                              
+                            },)
                       ],
                     ),
                   ));

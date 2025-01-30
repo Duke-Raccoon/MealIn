@@ -22,18 +22,30 @@ class ShoppingScreen extends StatelessWidget {
               
               return ListTile(
                 title: Container(
-                  decoration: BoxDecoration(
-                  color: Colors.deepOrange,
-                      borderRadius: BorderRadius.circular(20)),
+                   decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Colors.pinkAccent, Colors.deepOrangeAccent],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(30), // Rounded corners
+        boxShadow: [
+          BoxShadow(
+            color: Colors.pink.withOpacity(0.4), // Pink shadow for glow effect
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
                   height: h*0.1,
                   
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Row(children: [
                     Expanded(
                       flex: 3,
-                      child: Text(data[index].toString(), style: TextStyle(color: Colors.white),)),
+                      child: Text(data[index].toString(), style: const TextStyle(color: Colors.white),)),
                       PopupMenuButton(
-                        color: Colors.white,
+                        color: Colors.pinkAccent,
                         itemBuilder: (context){
                         return const [
                           PopupMenuItem(value: 'share', child: Text('share')),

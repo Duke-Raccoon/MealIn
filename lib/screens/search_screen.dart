@@ -28,6 +28,7 @@ class SearchScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: w * 0.05,
                 fontWeight: FontWeight.bold,
+                color: Colors.deepOrangeAccent
               ),
             ),
             Wrap(spacing: 8,

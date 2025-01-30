@@ -12,13 +12,13 @@ class CircleButton extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: w*0.05,
-          backgroundColor: Colors.deepOrange,
+          backgroundColor: Colors.pinkAccent,
           child: Icon(icon,color: Colors.white,),
         ),
         SizedBox(height: w*0.01,),
         Text(label,style: TextStyle(
           fontSize: w*0.03,
-          color: Colors.black
+          color: Colors.deepPurple
         ),)
       ],
     );

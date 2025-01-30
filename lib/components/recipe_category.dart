@@ -40,8 +40,9 @@ class RecipeCategoryView extends StatelessWidget {
             Text(
               name,
               style: TextStyle(
-                fontSize: w * 0.03,
+                fontSize: w * 0.035,
                 fontWeight: FontWeight.bold,
+                color: Colors.deepPurple
               ),
               textAlign: TextAlign.center,  // Center text
               maxLines: 2,  // Limit lines

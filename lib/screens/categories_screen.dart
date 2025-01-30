@@ -13,18 +13,18 @@ class RecipeCategory extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.grey[100],
         body: Padding(
-          padding: EdgeInsets.all(w * 0.003),
+          padding: EdgeInsets.all(w * 0.04),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: h * 0.05,
+                height: h * 0.03,
               ),
               Text(
                 'For You',
                 style:
-                    TextStyle(fontSize: w * 0.06, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: w * 0.06, fontWeight: FontWeight.bold, color: Colors.pinkAccent),
               ),
               SizedBox(
                 height: h*0.15,
@@ -41,7 +41,7 @@ class RecipeCategory extends StatelessWidget {
               Text(
                 'Tasty',
                 style:
-                    TextStyle(fontSize: w * 0.06, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: w * 0.06, fontWeight: FontWeight.bold, color: Colors.deepOrangeAccent),
               ),
               SizedBox(
                 height: h*0.15,
@@ -56,11 +56,22 @@ class RecipeCategory extends StatelessWidget {
                     
                 ],),
               ),
+              Row(
+                children: [
               Text(
-                'Any time of day',
+                'Any ',
                 style:
-                    TextStyle(fontSize: w * 0.06, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: w * 0.06, fontWeight: FontWeight.bold, color: Colors.pink),
               ),
+              Text(
+                'time of ',
+                style:
+                    TextStyle(fontSize: w * 0.06, fontWeight: FontWeight.bold, color: Colors.deepOrangeAccent),
+              ),Text(
+                'day',
+                style:
+                    TextStyle(fontSize: w * 0.06, fontWeight: FontWeight.bold, color: Colors.pinkAccent),
+            )]),
               SizedBox(
                 height: h*0.15,
                 child: Row(
@@ -69,13 +80,13 @@ class RecipeCategory extends StatelessWidget {
                     RecipeCategoryView(name:category[4], image:picture[4]),
                     RecipeCategoryView(name:category[5], image:picture[5]),
                     RecipeCategoryView(name:category[6], image:picture[6]),
-                    //RecipeCategoryView(name:category[6], image:picture[6]),
+                    
                     
                 ],),
                 
               ),
               Container(
-                height: h * 0.25,
+                height: h * 0.23,
                 width: w,
                 decoration: BoxDecoration(
                   image: DecorationImage(

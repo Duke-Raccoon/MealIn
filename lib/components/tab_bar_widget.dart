@@ -23,11 +23,11 @@ class TabBarWidget extends StatelessWidget {
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
               ),
-              unselectedLabelColor: Colors.purple,
-              labelColor: Colors.deepPurple,
+              unselectedLabelColor: Colors.pinkAccent,
+              labelColor: Colors.white,
               dividerColor: Colors.white,
               indicator: BoxDecoration(
-                  color: Colors.deepOrange,
+                  color: Colors.pinkAccent,
                   borderRadius: BorderRadius.circular(20)),
               labelPadding: EdgeInsets.symmetric(horizontal: w * 0.001),
               tabs: const [
@@ -144,7 +144,8 @@ class HomeTabBarView extends StatelessWidget {
                             snap['label'],
                             style: TextStyle(
                                 fontSize: w * 0.03,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.pinkAccent),
                           ),
                           SizedBox(
                             height: h * 0.01,
@@ -155,7 +156,7 @@ class HomeTabBarView extends StatelessWidget {
                                 'calories ${calories.toString()} . ${time.toString()} min',
                                 style: TextStyle(
                                   fontSize: w * 0.04,
-                                  color: Colors.grey
+                                  color: Colors.deepOrangeAccent
                                 ),
                               )
                             ],

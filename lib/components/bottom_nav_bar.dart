@@ -19,8 +19,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     double w = MediaQuery.of(context).size.width;
 
     return Container(
-      margin: EdgeInsets.all(16),
-      padding: EdgeInsets.symmetric(vertical: 12), // Adjust spacing
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(vertical: 12), // Adjust spacing
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Colors.pinkAccent, Colors.deepOrangeAccent],
@@ -32,7 +32,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           BoxShadow(
             color: Colors.pink.withOpacity(0.4), // Pink shadow for glow effect
             blurRadius: 15,
-            offset: Offset(0, 8),
+            offset: const Offset(0, 8),
           ),
         ],
       ),

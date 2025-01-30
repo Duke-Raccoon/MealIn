@@ -17,8 +17,10 @@ class HomePage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
+            
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+            
               const HomeAppBar(),
               SizedBox(
                 height: h * 0.02,
@@ -46,10 +48,11 @@ class HomePage extends StatelessWidget {
                     'Categories',
                     style: TextStyle(
                         fontSize: w * 0.05,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.pinkAccent),
                   ),
-                  const Text('see all'),
-                  SizedBox(width: w*0.02,)
+                  const Text('see all', style: TextStyle(color: Colors.deepOrangeAccent),),
+                  SizedBox(width: w*0.002,)
                 ],
               ),
               SizedBox(height: h*0.02,),

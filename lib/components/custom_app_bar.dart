@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
         color: Colors.white
       ),),
       centerTitle: true,
-      backgroundColor: Colors.deepOrange,
+      backgroundColor: Colors.pinkAccent,
       leading: back ? IconButton(
         onPressed: (){
           Navigator.pop(context);

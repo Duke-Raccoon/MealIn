@@ -19,14 +19,17 @@ class IngredientItem extends StatelessWidget {
       padding: EdgeInsets.only(
           top: h * 0.01, bottom: h * 0.01, left: w * 0.02, right: w * 0.03),
       decoration: BoxDecoration(
-        color: Colors.deepOrange,
-        borderRadius: BorderRadius.circular(20),
+        gradient: const LinearGradient(
+          colors: [Colors.pinkAccent, Colors.deepOrangeAccent],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3), // changes position of shadow
+            color: Colors.pink.withOpacity(0.4), // Pink shadow for glow effect
+            blurRadius: 15,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -51,30 +54,44 @@ class IngredientItem extends StatelessWidget {
           ),
           ValueListenableBuilder(
             valueListenable: Hive.box('shopping').listenable(),
-            builder: (context, box,_){
+            builder: (context, box, _) {
               bool isAdded = box.containsKey(food);
-              if(isAdded){
+              if (isAdded) {
                 return GestureDetector(
-                  onTap: (){
-                    box.delete(food);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.deepOrange,
-                      content: Text('Removed $food from shopping list', style: TextStyle(fontSize: h*0.02),),
-                      duration: const Duration(seconds: 1),
+                    onTap: () {
+                      box.delete(food);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.deepOrange,
+                        content: Text(
+                          'Removed $food from shopping list',
+                          style: TextStyle(fontSize: h * 0.02),
+                        ),
+                        duration: const Duration(seconds: 1),
+                      ));
+                    },
+                    child: const Icon(
+                      Icons.check_circle,
+                      color: Colors.white,
                     ));
-                  },
-                  child: const Icon(Icons.check_circle, color: Colors.white,));
+              } else {
+                return GestureDetector(
+                    onTap: () {
+                      box.put(food, '$food, $quantity $measure ');
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.deepOrangeAccent,
+                        content: Text(
+                          'Added $food to shopping list',
+                          style: TextStyle(fontSize: h * 0.02),
+                        ),
+                        duration: const Duration(seconds: 1),
+                      ));
+                    },
+                    child: const Icon(
+                      Icons.add_circle_outline,
+                      color: Colors.white,
+                    ));
               }
-              else{
-              return GestureDetector(
-                onTap: () {
-                  box.put(food,'$food, $quantity $measure ');
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.deepOrange,
-                    content: Text('Added $food to shopping list',style: TextStyle(fontSize: h*0.02),),
-                    duration: const Duration(seconds: 1),
-                  ));
-                },
-                child: const Icon(Icons.add_circle_outline, color: Colors.white,));
-            }},
+            },
           )
         ],
       ),

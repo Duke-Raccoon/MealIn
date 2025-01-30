@@ -14,12 +14,11 @@ class TextFieldWidget extends StatelessWidget {
       
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Colors.black26,
-            spreadRadius: 0.5,
-            offset: Offset(0, 1.5), 
-            // changes position of shadow
+            color: Colors.pink.withOpacity(0.4), // Pink shadow for glow effect
+            blurRadius: 15,
+            offset: const Offset(0, 8),
           ),
           
         ]
@@ -37,7 +36,7 @@ class TextFieldWidget extends StatelessWidget {
           hintText: 'what\'s your food thoughts today?',
           hintStyle: TextStyle(
             fontSize: w*0.03,
-            color: Colors.grey,
+            color: Colors.deepOrangeAccent,
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: w*0.05),
           border: OutlineInputBorder(
@@ -54,7 +53,7 @@ class TextFieldWidget extends StatelessWidget {
               MaterialPageRoute(builder: (context)=> AllRecipe(recipe: searchController.text)));
             },
             child:  Icon(Icons.search, 
-            color: Colors.deepOrange,
+            color: Colors.pinkAccent,
             size: w*0.06,
               
             ),
