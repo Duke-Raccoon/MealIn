@@ -5,6 +5,7 @@ import 'package:recipeapp/components/custom_clipper.dart';
 
 import 'package:recipeapp/components/ingredient_list.dart';
 import 'package:recipeapp/constants/detail_calories.dart';
+import 'package:recipeapp/constants/ingredient_quantity.dart';
 import 'package:recipeapp/constants/share.dart';
 import 'package:recipeapp/constants/start_recipe.dart';
 
@@ -13,12 +14,24 @@ class RecipeDetail extends StatelessWidget {
 
   const RecipeDetail({super.key, required this.recipeInfo});
 
+  String getFormattedTime(dynamic time) {
+    try {
+      double timeValue = 0.0;
+      if (time != null) {
+        timeValue = double.tryParse(time.toString()) ?? 0.0;
+      }
+      return timeValue == 0.0 ? "20.0 min" : "$timeValue min";
+    } catch (e) {
+      return "20.0 min"; // Default fallback
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    var ingredientCount = recipeInfo['ingredients'].length;
-    String time = recipeInfo['totalTime'].toString();
+    var ingredientCount = recipeInfo['ingredients']?.length ?? 0;
+    var time = recipeInfo['totalTime'];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -80,10 +93,13 @@ class RecipeDetail extends StatelessWidget {
                   SizedBox(
                     height: h * 0.001,
                   ),
+                  // Update in build method
                   Text(
-                    "$time min",
+                    getFormattedTime(time),
                     style: TextStyle(
-                        fontSize: w * 0.04, color: Colors.deepPurpleAccent),
+                      fontSize: w * 0.04,
+                      color: Colors.deepPurpleAccent
+                    ),
                   ),
                   SizedBox(
                     height: h * 0.01,
@@ -151,9 +167,14 @@ class RecipeDetail extends StatelessWidget {
                           label: 'Calories',
                         ),
                       ),
-                      const CircleButton(
-                        icon: Icons.table_chart_outlined,
-                        label: 'unit chart',
+                      GestureDetector(
+                        onTap: () {
+                          ShowQuantity.showQuantity(context);
+                        },
+                        child: const CircleButton(
+                          icon: Icons.table_chart_outlined,
+                          label: 'unit chart',
+                        ),
                       ),
                     ],
                   ),

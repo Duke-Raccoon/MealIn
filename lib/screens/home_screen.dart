@@ -51,6 +51,9 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Colors.pinkAccent),
                   ),
+                  SizedBox(
+                width: h * 0.2,
+              ),
                   const Text('see all', style: TextStyle(color: Colors.deepOrangeAccent),),
                   SizedBox(width: w*0.002,)
                 ],

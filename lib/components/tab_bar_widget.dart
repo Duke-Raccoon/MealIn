@@ -108,8 +108,10 @@ class HomeTabBarView extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 Map<String, dynamic> snap = snapshot.data![index];
-                int time = snap['totalTime'].toInt();
-                int calories = snap['calories'].toInt();
+                int time = snap['totalTime']?.toInt() ?? 0;
+                int calories = snap['calories']?.toInt() ?? 0;
+                String formattedTime = formatTime(time);
+                
                 return Container(
                   margin: EdgeInsets.only(right: w * 0.02),
                   width: w * 0.5,
@@ -153,7 +155,7 @@ class HomeTabBarView extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'calories ${calories.toString()} . ${time.toString()} min',
+                                'calories ${calories.toString()} . $formattedTime',
                                 style: TextStyle(
                                   fontSize: w * 0.04,
                                   color: Colors.deepOrangeAccent
@@ -181,4 +183,8 @@ class HomeTabBarView extends StatelessWidget {
     );
     
   }
+}
+
+String formatTime(int time) {
+  return time == 0 ? "20 min" : "$time min";
 }

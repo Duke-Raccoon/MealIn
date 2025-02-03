@@ -41,13 +41,23 @@ class OnBoardingScreen extends StatelessWidget {
                 child: Container(
                   height: h * 0.2,
                   width: w,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
+                  decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Colors.pinkAccent, Colors.deepOrangeAccent],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                      borderRadius:
+                          BorderRadius.circular(30), // Rounded corners
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.pink
+                              .withOpacity(0.4), // Pink shadow for glow effect
+                          blurRadius: 15,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
                     ),
-                  ),
                   child: Padding(
                     padding: EdgeInsets.only(top: h * 0.02),
                     child: Center(
@@ -55,14 +65,16 @@ class OnBoardingScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                        Text('Lets cook good food',style: TextStyle(
+                        Text('Lets cook the good food!',style: TextStyle(
                           fontSize: w*0.06,
-                          fontWeight: FontWeight.w600
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white
                         ),),
                         SizedBox(height: h*0.01,),
                         Text('Your favorite food is just a click away',style: TextStyle(
                           fontSize: w*0.04,
-                          fontWeight: FontWeight.w400
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white
                         ),),
                         SizedBox(height: h*0.01,),
                         SizedBox(
@@ -74,7 +86,7 @@ class OnBoardingScreen extends StatelessWidget {
                           child: const Text('Get Started',style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
-                            color: Colors.black
+                            color: Colors.deepPurpleAccent
                           ),),),
                         )
                         ],

@@ -7,9 +7,14 @@ class AllRecipe extends StatelessWidget {
   final String recipe;
   const AllRecipe({super.key, required this.recipe});
 
+  String formatTime(dynamic time) {
+    int timeValue = time?.toInt() ?? 0;
+    return timeValue == 0 ? "20 min" : "$timeValue min";
+  }
+
   @override
   Widget build(BuildContext context) {
-    //final h = MediaQuery.of(context).size.height;
+    
     final w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: CustomAppBar(title: recipe, back: true),
@@ -57,7 +62,7 @@ class AllRecipe extends StatelessWidget {
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.blueGrey,
+                                      color: Colors.pinkAccent,
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
                                           image: NetworkImage(snap['image']),
@@ -66,21 +71,36 @@ class AllRecipe extends StatelessWidget {
                                   ),
                                 ),
                                 Positioned(
-                                  child: Container(
-                                    height: 20,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.deepOrange,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '${time.toInt()} min', // Fix toString() call
-                                        style: const TextStyle(
-                                          color: Colors
-                                              .white, // Changed to white for better contrast
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
+                                  child: Padding(padding: const EdgeInsets.all(5),
+                                    child: Container(
+                                      height: 20,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                                          gradient: const LinearGradient(
+                                                            colors: [Colors.pinkAccent, Colors.deepOrangeAccent],
+                                                            begin: Alignment.topLeft,
+                                                            end: Alignment.bottomRight,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius.circular(10), // Rounded corners
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors.pink
+                                                                  .withOpacity(0.4), // Pink shadow for glow effect
+                                                              blurRadius: 15,
+                                                              offset: const Offset(0, 8),
+                                                            ),
+                                                          ],
+                                                        ),
+                                      child: Center(
+                                        child: Text(
+                                          formatTime(time),
+                                          style: const TextStyle(
+                                            color: Colors
+                                                .white, // Changed to white for better contrast
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -91,7 +111,7 @@ class AllRecipe extends StatelessWidget {
                         Expanded(
                             child: Text(
                           snap['label'],
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.deepPurpleAccent),
                         )),
                       ],
                     ),
