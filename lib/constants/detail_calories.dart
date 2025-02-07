@@ -24,7 +24,7 @@ class ShowDialog {
             contentPadding: EdgeInsets.zero,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(70)),
-                backgroundColor:  Colors.pink,
+                backgroundColor:  Colors.pinkAccent,
             title: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
